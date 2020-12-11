@@ -1,0 +1,5 @@
+emails:
+  - email: test@email.com
+    id: test
+  - email: anothertest@email.com
+    id: xyz

@@ -12,11 +12,20 @@ pipeline {
       steps {
         container('maven') {
           sh 'mvn -version'
+          def emails = readYaml file: 'test.yml'
+          echo "${emails}"
         }
         container('busybox') {
           sh '/bin/busybox'
         }
       }
+    }
+  }
+
+  post {
+    always {
+      sleep 10
+      deleteDir()
     }
   }
 }
