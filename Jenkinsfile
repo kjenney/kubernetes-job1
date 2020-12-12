@@ -17,8 +17,10 @@ pipeline {
               Boolean bool = fileExists 'test.csv'
               if (bool) {
                 println "The File exists :)"
-                USER_ID = sh(script: "/bin/bash -c 'grep ${BUILD_USER_EMAIL} test.csv | awk -F \',\' \'{print \$2}\''", returnStdout: true)
-                println "${USER_ID}"
+                def map_script= $/eval "grep ${BUILD_USER_EMAIL} test.csv | awk -F ',' '{print \$2}'"
+                echo "${map_script}"
+                USER_ID= sh(script: "${map_script}", returnStdout: true)
+                echo "${USER_ID}"
               }
               else {
                 println "The File does not exist :("
