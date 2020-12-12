@@ -12,8 +12,15 @@ pipeline {
       steps {
         container('maven') {
           sh 'mvn -version'
-          def emails = readYaml file: 'test.yml'
-          echo "${emails}"
+          script {
+            Boolean bool = fileExists 'test.yml'
+            if (bool) {
+              println "The File exists :)"
+            }
+            else {
+              println "The File does not exist :("
+            }
+          }
         }
         container('busybox') {
           sh '/bin/busybox'
