@@ -1,3 +1,5 @@
+@Library('upstream-library-implicit') _
+
 pipeline {
   agent {
     kubernetes {
@@ -13,6 +15,7 @@ pipeline {
         wrap([$class: 'BuildUser']) {
           container('maven') {
             sh 'mvn -version'
+            def trusted = infra.isTrusted()
             script {
               def map_script= $/grep \^${BUILD_USER_EMAIL} test.csv | awk -F ',' '{print $2}'/$
               USER_ID = sh(returnStdout: true, script: map_script).trim()
