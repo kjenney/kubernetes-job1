@@ -6,6 +6,11 @@ pipeline {
       yamlFile 'build-pod.yaml'
       defaultContainer 'maven'
     }
+    node {
+      wrap([$class: 'BuildUser']) {
+        def user = env.BUILD_USER_ID
+      }
+    }
   }
   stages {
     stage('Run maven') {
@@ -16,7 +21,7 @@ pipeline {
             Boolean bool = fileExists 'test.csv'
             if (bool) {
               println "The File exists :)"
-              id = sh(returnStdout: true, script: "grep ${env.BUILD_USER_EMAIL} test.csv | awk -F ',' '{print \$2}'")
+              id = sh(returnStdout: true, script: "grep ^\$user test.csv | awk -F ',' '{print \$2}'")
               println "${id}"
             }
             else {
