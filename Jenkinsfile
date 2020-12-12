@@ -20,7 +20,8 @@ pipeline {
             if (bool) {
               println "The File exists :)"
               def emails = readYaml file: 'test.yml'
-              echo "${emails}"
+              assert emails['emails'][0]['email'] == "${email}"
+              println "It's there!"
             }
             else {
               println "The File does not exist :("
