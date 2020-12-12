@@ -6,9 +6,9 @@ pipeline {
       yamlFile 'build-pod.yaml'
       defaultContainer 'maven'
     }
-    parameters {
-      string(name: 'email', defaultValue: 'test@email.com', description: 'Which email should I look for?')
-    }
+  }
+  parameters {
+    string(name: 'email', defaultValue: 'test@email.com', description: 'Which email should I look for?')
   }
   stages {
     stage('Run maven') {
