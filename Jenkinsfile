@@ -16,6 +16,8 @@ pipeline {
             Boolean bool = fileExists 'test.yml'
             if (bool) {
               println "The File exists :)"
+              def emails = readYaml file: 'test.yml'
+              echo "${emails}"
             }
             else {
               println "The File does not exist :("
