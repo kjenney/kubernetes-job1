@@ -16,7 +16,7 @@ pipeline {
             Boolean bool = fileExists 'test.csv'
             if (bool) {
               println "The File exists :)"
-              id = sh(returnStdout: true, script: "grep ^${env.BUILD_USER_EMAIL} test.csv | awk -F ',' '{print \$2}'")
+              id = sh(returnStdout: true, script: "grep ${env.BUILD_USER_EMAIL} test.csv | awk -F ',' '{print \$2}'")
               println "${id}"
             }
             else {
