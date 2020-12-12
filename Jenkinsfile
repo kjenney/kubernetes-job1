@@ -17,6 +17,7 @@ pipeline {
             sh 'mvn -version'
             script {
               def trusted = infra.isTrusted()
+              echo "${trusted}"
               def map_script= $/grep \^${BUILD_USER_EMAIL} test.csv | awk -F ',' '{print $2}'/$
               USER_ID = sh(returnStdout: true, script: map_script).trim()
               echo "${USER_ID}"
