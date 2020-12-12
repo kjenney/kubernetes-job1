@@ -8,26 +8,27 @@ pipeline {
     }
   }
   stages {
-    stage('Run maven') {
+    stage('Run stuff') {
       steps {
         wrap([$class: 'BuildUser']) {
-          container('maven') {
-            sh 'mvn -version'
-            script {
-              Boolean bool = fileExists 'test.csv'
-              if (bool) {
-                println "The File exists :)"
-                id = sh(returnStdout: true, script: "grep ${env.BUILD_USER_EMAIL} test.csv | awk -F ',' '{print \$2}'")
-                println "${id}"
-              }
-              else {
-                println "The File does not exist :("
-              }
+          sh 'echo "${BUILD_USER}"'
+        }
+        container('maven') {
+          sh 'mvn -version'
+          script {
+            Boolean bool = fileExists 'test.csv'
+            if (bool) {
+              println "The File exists :)"
+              id = sh(returnStdout: true, script: "grep ${env.BUILD_USER_EMAIL} test.csv | awk -F ',' '{print \$2}'")
+              println "${id}"
+            }
+            else {
+              println "The File does not exist :("
             }
           }
-          container('busybox') {
-            sh '/bin/busybox'
-          }
+        }
+        container('busybox') {
+          sh '/bin/busybox'
         }
       }
     }
