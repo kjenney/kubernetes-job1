@@ -16,12 +16,11 @@ pipeline {
         container('maven') {
           sh 'mvn -version'
           script {
-            Boolean bool = fileExists 'test.yml'
+            Boolean bool = fileExists 'test.csv'
             if (bool) {
               println "The File exists :)"
-              def emails = readYaml file: 'test.yml'
-              assert emails['emails'][0]['email'] == "${email}"
-              println "It's there!"
+              id = sh(returnStdout: true, script: "grep ${email} test.csv | awk '{print \$2}'")
+              println "${id}"
             }
             else {
               println "The File does not exist :("
