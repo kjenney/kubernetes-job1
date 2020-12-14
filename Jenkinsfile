@@ -1,4 +1,3 @@
-@Library('upstream-library-implicit') _
 @Library('shared-library') _
 
 pipeline {
