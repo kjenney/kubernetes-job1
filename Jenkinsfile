@@ -20,13 +20,13 @@ pipeline {
               if ( USER_ID ) {
                 echo "${BUILD_USER_EMAIL} matched to ${USER_ID}"
               } else {
-                error("Failed to find user id for ${BUILD_USER_EMAIL}")
+                echo "Failed to find user id for ${BUILD_USER_EMAIL}"
               }
             }
           }
-          container('busybox') {
-            sh '/bin/busybox'
-          }
+        }
+        container('busybox') {
+          sh '/bin/busybox'
         }
       }
     }
