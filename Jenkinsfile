@@ -17,11 +17,11 @@ pipeline {
             sh 'mvn -version'
             script {
               def USER_ID = csv.matchValue(${BUILD_USER_EMAIL},'email','userid')
-              if ( USER_ID ) {
-                echo "${BUILD_USER_EMAIL} matched to ${USER_ID}"
-              } else {
-                echo "Failed to find user id for ${BUILD_USER_EMAIL}"
-              }
+              //if ( USER_ID ) {
+              //  echo "${BUILD_USER_EMAIL} matched to ${USER_ID}"
+              //} else {
+              //  echo "Failed to find user id for ${BUILD_USER_EMAIL}"
+              //}
             }
           }
         }
