@@ -24,8 +24,9 @@ pipeline {
               }
             }
           }
-        container('busybox') {
-          sh '/bin/busybox'
+          container('busybox') {
+            sh '/bin/busybox'
+          }
         }
       }
     }
