@@ -16,7 +16,7 @@ pipeline {
           container('maven') {
             sh 'mvn -version'
             script {
-              def match = csv.matchValue('apples','type','origin')
+              def match = csv.matchValue('apple','type','origin')
               if ( match ) { println "${match}" }
               //def map_script= $/grep \^${BUILD_USER_EMAIL} test.csv | awk -F ',' '{print $2}'/$
               //USER_ID = sh(returnStdout: true, script: map_script).trim()
