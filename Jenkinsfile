@@ -1,4 +1,5 @@
 @Library('upstream-library-implicit') _
+@Library('shared-library') _
 
 pipeline {
   agent {
@@ -16,11 +17,11 @@ pipeline {
           container('maven') {
             sh 'mvn -version'
             script {
-              def trusted = infra.isTrusted()
-              echo "${trusted}"
-              def map_script= $/grep \^${BUILD_USER_EMAIL} test.csv | awk -F ',' '{print $2}'/$
-              USER_ID = sh(returnStdout: true, script: map_script).trim()
-              echo "${USER_ID}"
+              def match = csv.matchValue('apples','type','origin')
+              if ( match ) { println "${match}" }
+              //def map_script= $/grep \^${BUILD_USER_EMAIL} test.csv | awk -F ',' '{print $2}'/$
+              //USER_ID = sh(returnStdout: true, script: map_script).trim()
+              //echo "${USER_ID}"
             }
           }
         }
