@@ -16,8 +16,8 @@ pipeline {
           container('maven') {
             sh 'mvn -version'
             script {
-              def user = env.BUILD_USER_ID
-              //def USER_ID = csv.matchValue(${BUILD_USER_EMAIL},'email','userid')
+              def email = env.BUILD_USER_EMAIL
+              def USER_ID = csv.matchValue(email,'email','userid')
               //if ( USER_ID ) {
               //  echo "${BUILD_USER_EMAIL} matched to ${USER_ID}"
               //} else {
