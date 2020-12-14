@@ -16,13 +16,12 @@ pipeline {
           container('maven') {
             sh 'mvn -version'
             script {
-              def email = env.BUILD_USER_EMAIL
-              def USER_ID = csv.matchValue(email,'email','userid')
-              //if ( USER_ID ) {
-              //  echo "${BUILD_USER_EMAIL} matched to ${USER_ID}"
-              //} else {
-              //  echo "Failed to find user id for ${BUILD_USER_EMAIL}"
-              //}
+              def USER_ID = csv.matchValue(env.BUILD_USER_EMAIL,'email','userid')
+              if ( USER_ID ) {
+                echo "${BUILD_USER_EMAIL} matched to ${USER_ID}"
+              } else {
+                echo "Failed to find user id for ${BUILD_USER_EMAIL}"
+              }
             }
           }
         }
