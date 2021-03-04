@@ -11,6 +11,9 @@ pipeline {
   }
   stages {
     stage('Run stuff') {
+      options {
+        timeout(time: 1, unit: 'HOURS')
+      }
       steps {
         wrap([$class: 'BuildUser']) {
           container('maven') {
